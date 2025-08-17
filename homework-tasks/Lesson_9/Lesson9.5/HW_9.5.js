@@ -65,7 +65,7 @@ let coursesArray = [
     monthDuration: 4,
     hourDuration: 909,
     modules: ['html', 'css', 'js', 'mysql', 'mongodb', 'react', 'angular', 'aws', 'docker', 'git', 'sass']
-  }
+  },
 ]
 
 
