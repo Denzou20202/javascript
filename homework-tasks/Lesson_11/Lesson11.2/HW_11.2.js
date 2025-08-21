@@ -1,4 +1,4 @@
-const container = document.getElementsByClassName('container')
+const container = document.getElementById('container')
 
 fetch('https://dummyjson.com/recipes')
   .then(res => res.json())
@@ -6,7 +6,43 @@ fetch('https://dummyjson.com/recipes')
     const {recipes} = recipesObject
     console.log(recipes)
 
+    for (const recipe of recipes) {
+      const div = document.createElement('div')
+      div.classList.add('cart-container')
+      const titleDiv = document.createElement('div')
+      titleDiv.classList.add('title-text')
+      titleDiv.innerText = `
+          "userId" : ${recipe.userId}
+          "name" : ${recipe.name}
+         `
+      const img = document.createElement('img')
+      img.src = recipe.image
+      img.setAttribute('style', 'width:250px; height:250px; border-radius: 50% ')
+      const infoDiv = document.createElement('p')
+      infoDiv.innerText = `
+            "caloriesPerServing" : ${recipe.caloriesPerServing}
+            "cookTimeMinutes" : ${recipe.cookTimeMinutes}
+            "cuisine" : "${recipe.cuisine}"
+            "difficulty" : "${recipe.difficulty}"
+        `
+      const ul = document.createElement('ul')
+      ul.innerText = "Ingredients"
+      for (const product of recipe.ingredients) {
+        const li = document.createElement('li')
+        li.innerText = `${product}`
+        ul.appendChild(li)
+      }
+      const ol = document.createElement('ol')
+      ol.innerText = "Instruction"
+      for (const item of recipe.instructions) {
+        const li = document.createElement('li')
+        li.innerText = `${item}`
+        ol.appendChild(li)
+      }
 
+      div.append(titleDiv, img, infoDiv,ol, ul)
+      container.appendChild(div)
+    }
   });
 
 
@@ -19,19 +55,14 @@ fetch('https://dummyjson.com/recipes')
 
 
 
-// caloriesPerServing : 300
-// cookTimeMinutes : 15
-// cuisine : "Italian"
-// difficulty : "Easy"
-// id : 1
-// image : "https://cdn.dummyjson.com/recipe-images/1.webp"
-// ingredients : (6) ['Pizza dough', 'Tomato sauce', 'Fresh mozzarella cheese', 'Fresh basil leaves', 'Olive oil', 'Salt and pepper to taste']
-// instructions : (6) ['Preheat the oven to 475°F (245°C).', 'Roll out the pizza dough and spread tomato sauce evenly.', 'Top with slices of fresh mozzarella and fresh basil leaves.', 'Drizzle with olive oil and season with salt and pepper.', 'Bake in the preheated oven for 12-15 minutes or until the crust is golden brown.', 'Slice and serve hot.']
-// mealType : ['Dinner']
-// name : "Classic Margherita Pizza"
+
+
+
+
+
+
 // prepTimeMinutes : 20
 // rating : 4.6
 // reviewCount : 98
 // servings : 4
-// tags : (2) ['Pizza', 'Italian']
-// userId : 166
+
